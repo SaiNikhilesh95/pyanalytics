@@ -4,4 +4,4 @@ Spyder Editor
 
 This is a temporary script file.
 """
-list=[1,4,7,10,4]
+list=[1,4,7,10,5,8]

@@ -154,6 +154,8 @@ numpy.array([list1])
 import numpy as np #np is alias
 np1 = np.arange(1,10)
 np1
+np2=np.arange(50,101)
+np2
 
 x=np.arange(start=1,stop=1000000,step=2)
 len(x)
@@ -166,7 +168,7 @@ type(np1)
 np?
 #help on numpy 
 dir(np)  #functions available in numpy
-np.mean?  # help on mean function of numpy
+np.mean(np1)  # help on mean function of numpy
 
 np2 = np.array([ 90, 50, 60, 70 ])
 np2
@@ -188,7 +190,7 @@ import pandas as pd
 pd?
 dir(pd)
 
-df1 = pd.DataFrame({'rollno':[1,2,3,4], 'name': [ "Dhiraj", "Kounal", "Akhil", "Pooja" ], 'marks':[ 40, 50, 60.5, 70 ], 'gender':['M', 'M','M', 'F']})
+df1 = pd.DataFrame({'rollno':[1,2,3,4], 'name': [ "Dhiraj", "Kounal", "Akhil", "Pooja" ], 'marks':[ 40, 50, 60.5, 70 ], 'gender':['M', 'M','M', 'F'],'age':[14,13,15,14]})
 df1
 type(df1) 
 
@@ -200,13 +202,14 @@ df1.shape  # rows and columns
 df1.groupby('gender').size()
 df1.groupby('gender')['marks'].mean()
 df1.groupby('gender').aggregate({'marks': [np.mean, 'max','min','std','count']})
+df1.groupby('age')['marks'].mean()
 
 #%% #Graphs https://python-graph-gallery.com/
 #https://matplotlib.org/
 
 import matplotlib.pyplot as plt
 df1.groupby('gender').size()
-df1.groupby('gender').size().plot(kind='bar')
+df1.groupby('age').size().plot(kind='pie')
 
 plt.hist(df1['marks'])
 
@@ -216,7 +219,7 @@ import seaborn as sns
 iris = sns.load_dataset("iris")
 iris.head()
 iris.tail()
-df1.groupby('gender').size()
+iris.groupby('species').size()
 iris.groupby('species').size().plot(kind='bar')
 sns.pairplot(iris)  #relationship diagrams
 
@@ -230,10 +233,10 @@ data('mtcars')
 
 #https://vincentarelbundock.github.io/Rdatasets/datasets.html
 import statsmodels.api as sm
-mtcars = sm.datasets.get_rdataset(dataname='mtcars', package= 'datasets')
+mtcars = data('mtcars')
 mtcars.data.head()
-
-
+mtcars.groupby('gear').size()
+dir(mtcars)
 #%%
 #Load from Excel/ CSV and export to
 data = mtcars.data
@@ -254,7 +257,7 @@ writer.save()
 data.to_excel?
 #load from CSV and Excel
 data2a
-data2a = pd.read_csv('mtcars.csv') #when csv is in project folder
+data2a = pd.read_csv('cardio.csv') #when csv is in project folder
 data2a
 data2b
 data2b = pd.read_csv('E:/analytics/projects/pyanalytics/mtcars.csv')
@@ -262,7 +265,7 @@ data2b
 #csv in any other location - full path
 data2b
 data2a.head()
-
+data2a.groupby('Product').size().plot(kind='bar')
 data2c = pd.read_excel('mtcarsExcel.xlsx',header=0)
 #header=None
 data2c.head()
