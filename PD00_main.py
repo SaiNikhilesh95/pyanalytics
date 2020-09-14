@@ -11,7 +11,7 @@ mtcars = data('mtcars')
 mtcarsDF = mtcars
 
 mtcarsDF
-
+mtcarsDF.groupby('gear').size()
 #%%describing
 mtcarsDF.shape
 mtcarsDF.head(3)
@@ -36,7 +36,7 @@ mtcars.values
 
 #%%% access DF
 mtcarsDF[0:5]
-mtcarsDF[0:5,0:3]
+mtcarsDF.iloc[0:5,1:3]
 
 #single value: at
 mtcarsDF.at['Mazda RX4', 'mpg']
@@ -209,7 +209,7 @@ import pandas as pd
 pd.crosstab(mtcarsDF.cyl, mtcarsDF.gear)
 
 #pivot
-pd.crosstab(mtcarsDF.cyl, mtcarsDF.gear, margins=True, margins_name='Total')
+pd.crosstab(mtcarsDF.cyl, mtcarsDF.gear, margins=True, margins_name='Total').plot(kind='bar')
 pd.crosstab(mtcarsDF.cyl, [mtcarsDF.gear, mtcarsDF.am])
 pd.crosstab([mtcarsDF.cyl, mtcarsDF.vs], [mtcarsDF.gear, mtcarsDF.am], rownames=['Cylinder','EngineShape'], colnames=['Gear', 'TxType'], dropna=False)
 
